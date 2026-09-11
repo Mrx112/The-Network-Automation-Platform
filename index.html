@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network Automation Platform — Dokumentasi Fitur</title>
+<style>
+:root{
+  --bg:#0a1929;
+  --bg2:#0f2a3f;
+  --line:#1e3a5f;
+  --txt:#e8ecf4;
+  --dim:#93a2ba;
+  --biru:#00bcd4;
+  --biru2:rgba(0,188,212,.14);
+  --hijau:#4caf50;
+  --hijau2:rgba(76,175,80,.14);
+  --oranye:#ff9800;
+  --oranye2:rgba(255,152,0,.14);
+  --merah:#f44336;
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:"Segoe UI",Roboto,system-ui,-apple-system,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* NAVBAR */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,25,41,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--biru)}
+.brand svg{width:30px;height:30px;border-radius:9px}
+.nav ul{display:flex;gap:22px;list-style:none;margin-left:auto;font-size:13px;color:var(--dim);font-weight:600}
+.nav ul a:hover{color:var(--txt)}
+.nav .cta{
+  background:var(--biru);color:#0a1929;font-size:13px;font-weight:700;
+  padding:9px 16px;border-radius:10px;white-space:nowrap;
+}
+.nav .cta:hover{filter:brightness(1.12)}
+@media(max-width:900px){ .nav ul{display:none} .nav .cta{margin-left:auto} }
+
+/* HERO */
+.hero{
+  padding:80px 0 70px;
+  background:
+    radial-gradient(900px 460px at 78% -10%, rgba(0,188,212,.18), transparent 60%),
+    radial-gradient(700px 420px at 8% 20%, rgba(76,175,80,.12), transparent 60%);
+  border-bottom:1px solid var(--line);
+}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:#9de0ff;background:var(--biru2);border:1px solid rgba(0,188,212,.3);
+  padding:6px 14px;border-radius:999px;margin-bottom:20px;
+}
+.hero h1{font-size:clamp(30px,4.6vw,48px);line-height:1.15;letter-spacing:-1px;font-weight:800}
+.hero h1 span{color:var(--biru)}
+.hero p.lead{color:var(--dim);font-size:17px;margin-top:18px;max-width:52ch}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{
+  font-size:12px;font-weight:700;color:var(--dim);
+  background:var(--bg2);border:1px solid var(--line);
+  padding:7px 14px;border-radius:999px;
+}
+.chip b{color:var(--txt)}
+.aksi{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;padding:13px 22px;border-radius:12px;
+  border:1px solid transparent;cursor:pointer;
+}
+.btn-utama{background:var(--biru);color:#0a1929}
+.btn-utama:hover{filter:brightness(1.12)}
+.btn-hantu{background:transparent;color:var(--txt);border-color:var(--line)}
+.btn-hantu:hover{border-color:#3d4658}
+.hero-mock{display:flex;justify-content:center}
+@media(max-width:900px){ .hero .wrap{grid-template-columns:1fr;gap:44px} }
+
+/* PHONE FRAME */
+.phone{
+  position:relative;
+  width:var(--w,272px);
+  background:linear-gradient(160deg,#1d222e,#0a0c11);
+  border-radius:36px;padding:9px;
+  box-shadow:0 30px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07) inset;
+  flex:none;
+}
+.phone .layar{
+  position:relative;width:100%;aspect-ratio:412/892;
+  border-radius:28px;overflow:hidden;background:#0f2a3f;
+  display:flex;flex-direction:column;
+}
+.punch{
+  position:absolute;top:9px;left:50%;transform:translateX(-50%);
+  width:9px;height:9px;border-radius:50%;background:#05070a;z-index:4;
+  box-shadow:0 0 0 1.5px rgba(0,0,0,.5);
+}
+.gestur{
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  width:34%;height:4px;border-radius:3px;background:rgba(255,255,255,.8);z-index:3;
+  box-shadow:0 1px 3px rgba(0,0,0,.4);pointer-events:none;
+}
+.bar-status{
+  position:absolute;top:0;left:0;right:0;height:28px;z-index:3;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 15px;font-size:10px;font-weight:700;color:#fff;
+  text-shadow:0 1px 3px rgba(0,0,0,.65);pointer-events:none;
+}
+.bar-status .kanan{display:flex;align-items:center;gap:5px}
+.sinyal{display:flex;align-items:flex-end;gap:1.5px;height:9px}
+.sinyal i{width:2px;background:#fff;border-radius:1px;display:block}
+.sinyal i:nth-child(1){height:3px}
+.sinyal i:nth-child(2){height:5px}
+.sinyal i:nth-child(3){height:7px}
+.sinyal i:nth-child(4){height:9px}
+.baterai{width:17px;height:9px;border:1.3px solid #fff;border-radius:2.5px;position:relative}
+.baterai::after{content:"";position:absolute;right:-3px;top:2.2px;width:1.6px;height:3.6px;background:#fff;border-radius:0 1px 1px 0}
+.baterai::before{content:"";position:absolute;left:1.2px;top:1.2px;bottom:1.2px;width:70%;background:#fff;border-radius:1px}
+
+/* SECTION */
+section{padding:82px 0;border-bottom:1px solid var(--line)}
+.judul{max-width:660px;margin-bottom:44px}
+.judul .no{
+  font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;
+  color:var(--biru);margin-bottom:10px;display:block;
+}
+.judul h2{font-size:clamp(24px,3.2vw,34px);line-height:1.22;letter-spacing:-.5px;font-weight:800}
+.judul p{color:var(--dim);margin-top:14px;font-size:15px}
+
+/* GALLERY */
+.galeri{display:flex;gap:26px;overflow-x:auto;padding:6px 2px 24px;scroll-snap-type:x mandatory}
+.galeri .item{scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;min-width:300px}
+.galeri .ket{text-align:center;max-width:252px}
+.galeri .ket b{display:block;font-size:14px;margin-bottom:2px}
+.galeri .ket span{font-size:12.5px;color:var(--dim)}
+
+/* CARDS */
+.kisi{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:20px}
+.kartu{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px;
+}
+.kartu h3{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--biru);margin-bottom:16px;font-weight:800}
+.kartu p{font-size:13.5px;color:var(--dim)}
+.kartu b{font-size:15.5px;display:block;margin-bottom:7px;color:var(--txt)}
+.kartu .ikon{font-size:22px;margin-bottom:12px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:13px;background:var(--biru2);border:1px solid rgba(0,188,212,.28)}
+
+/* FLOW */
+.alur{display:flex;flex-wrap:wrap;align-items:stretch;gap:14px}
+.langkah{flex:1 1 190px;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px}
+.langkah .n{font-size:11px;font-weight:800;color:var(--biru);letter-spacing:1.4px;text-transform:uppercase;margin-bottom:8px;display:block}
+.langkah b{font-size:15px;display:block;margin-bottom:6px}
+.langkah p{font-size:13px;color:var(--dim)}
+.panah{display:flex;align-items:center;color:#3d4658;font-size:22px;font-weight:700}
+@media(max-width:780px){ .panah{display:none} }
+
+/* TABLE */
+.tabel{width:100%;border-collapse:collapse;font-size:14px;background:var(--bg2);border-radius:var(--radius);overflow:hidden}
+.tabel tr{border-bottom:1px solid var(--line)}
+.tabel tr:last-child{border:0}
+.tabel td{padding:15px 22px}
+.tabel td:first-child{color:var(--dim);width:38%;font-weight:600}
+.tabel td:last-child{font-weight:600}
+.tabel code,.langkah code{
+  font-family:Consolas,monospace;font-size:12.5px;
+  background:var(--biru2);border:1px solid rgba(0,188,212,.24);
+  padding:1px 6px;border-radius:5px;color:#9de0ff;
+}
+
+/* CTA STRIP */
+.cta-strip{
+  background:linear-gradient(90deg, rgba(0,188,212,.18), rgba(76,175,80,.12));
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:44px 0;text-align:center;
+}
+.cta-strip h2{font-size:clamp(22px,3vw,30px);margin-bottom:10px}
+.cta-strip p{color:var(--dim);font-size:15px;margin-bottom:24px}
+.cta-strip .aksi{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* FOOTER */
+footer{padding:44px 0;color:var(--dim);font-size:13px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer b{color:var(--txt)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="24" fill="#12161f"/>
+        <polygon points="50,16 86,36 50,56 14,36" fill="#7cbe5c"/>
+        <polygon points="14,36 50,56 50,88 14,68" fill="#8c6444"/>
+        <polygon points="86,36 50,56 50,88 86,68" fill="#6f4e35"/>
+      </svg>
+      NetAuto Platform
+    </div>
+    <ul>
+      <li><a href="#layar">Layar</a></li>
+      <li><a href="#arsitektur">Arsitektur</a></li>
+      <li><a href="#fitur">Fitur</a></li>
+      <li><a href="#alur">Alur</a></li>
+      <li><a href="#api">API</a></li>
+    </ul>
+    <a class="cta" href="#layar">Jelajahi Fitur</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Enterprise Network Automation</span>
+      <h1>Otomatisasi jaringan,<br><span>dalam genggaman.</span></h1>
+      <p class="lead">
+        Platform otomatisasi jaringan enterprise yang terpadu untuk konfigurasi bulk,
+        discovery device, backup, monitoring, dan deployment — semua dalam satu antarmuka.
+      </p>
+      <div class="chips">
+        <span class="chip"><b>FastAPI</b> Backend</span>
+        <span class="chip"><b>React</b> Frontend</span>
+        <span class="chip"><b>WebSocket</b> Real-time</span>
+        <span class="chip">Multi-vendor <b>Cisco, Juniper, Arista, Huawei</b></span>
+        <span class="chip"><b>100%</b> Automated</span>
+      </div>
+      <div class="aksi">
+        <a class="btn btn-utama" href="#layar">Lihat Fitur &rarr;</a>
+        <a class="btn btn-hantu" href="#api">Dokumentasi API</a>
+      </div>
+    </div>
+    <div class="hero-mock">
+      <div class="phone" style="--w:300px">
+        <div class="layar" style="background:#0f2a3f;align-items:center;justify-content:center;color:var(--dim);font-size:13px;text-align:center;padding:20px;">
+          <div style="font-size:40px;margin-bottom:10px;">&#128187;</div>
+          <div style="color:var(--biru);font-weight:700;font-size:14px;">Network Automation Platform</div>
+          <div style="margin-top:6px;">v2.0.0</div>
+          <div style="margin-top:4px;font-size:11px;">Dashboard Preview</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYAR APLIKASI -->
+<section id="layar">
+  <div class="wrap">
+    <div class="judul">
+      <span class="no">01 &mdash; Tampilan Antarmuka</span>
+      <h2>Tujuh modul utama, satu platform terpadu</h2>
+      <p>Setiap modul dirancang untuk alur kerja spesifik, dari discovery hingga deployment konfigurasi.</p>
+    </div>
+
+    <div class="galeri">
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;align-items:center;justify-content:center;">
+            <div style="text-align:center;padding:20px;">
+              <div style="font-size:32px;margin-bottom:8px;">&#128200;</div>
+              <div style="color:var(--biru);font-weight:700;font-size:13px;">DASHBOARD</div>
+              <div style="color:var(--dim);font-size:11px;margin-top:4px;">12 Devices &middot; 10 Online &middot; 3 Tasks</div>
+              <div style="margin-top:10px;display:flex;gap:6px;justify-content:center;">
+                <div style="width:60px;height:50px;background:#1e3a5f;border-radius:8px;border:1px solid var(--biru);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                  <div style="font-size:10px;color:var(--dim);">Total</div>
+                  <div style="font-size:16px;color:var(--biru);font-weight:700;">12</div>
+                </div>
+                <div style="width:60px;height:50px;background:#1e3a5f;border-radius:8px;border:1px solid var(--hijau);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                  <div style="font-size:10px;color:var(--dim);">Online</div>
+                  <div style="font-size:16px;color:var(--hijau);font-weight:700;">10</div>
+                </div>
+                <div style="width:60px;height:50px;background:#1e3a5f;border-radius:8px;border:1px solid var(--oranye);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                  <div style="font-size:10px;color:var(--dim);">Pending</div>
+                  <div style="font-size:16px;color:var(--oranye);font-weight:700;">3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Dashboard</b><span>Overview statistik device, status koneksi, dan aktivitas terkini dalam satu layar.</span></div>
+      </div>
+
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;padding:30px 12px 12px;">
+            <div style="font-size:11px;color:var(--biru);font-weight:700;margin-bottom:8px;">DEVICE LIST</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;background:#1e3a5f;padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+                <div><div style="font-size:11px;font-weight:600;">Router-Main</div><div style="font-size:9px;color:var(--dim);">192.168.1.1</div></div>
+                <div style="display:flex;align-items:center;gap:4px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--hijau);"></div><span style="font-size:10px;color:var(--hijau);">Online</span></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;background:#1e3a5f;padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+                <div><div style="font-size:11px;font-weight:600;">Switch-Core-01</div><div style="font-size:9px;color:var(--dim);">192.168.1.2</div></div>
+                <div style="display:flex;align-items:center;gap:4px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--hijau);"></div><span style="font-size:10px;color:var(--hijau);">Online</span></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;background:#1e3a5f;padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+                <div><div style="font-size:11px;font-weight:600;">Firewall-Edge</div><div style="font-size:9px;color:var(--dim);">192.168.1.254</div></div>
+                <div style="display:flex;align-items:center;gap:4px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--oranye);"></div><span style="font-size:10px;color:var(--oranye);">Pending</span></div>
+              </div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Device List</b><span>Manajemen perangkat jaringan lengkap dengan status, tipe, dan aksi cepat.</span></div>
+      </div>
+
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;padding:30px 12px 12px;">
+            <div style="font-size:11px;color:var(--biru);font-weight:700;margin-bottom:8px;">CONFIG GENERATOR</div>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;background:#1e3a5f;border-radius:8px;padding:8px;border:1px solid var(--line);">
+                <div style="font-size:9px;color:var(--dim);margin-bottom:4px;">TEMPLATE</div>
+                <div style="font-size:10px;font-weight:600;">interface_template.j2</div>
+                <div style="margin-top:8px;font-size:9px;color:var(--dim);">VARIABLES</div>
+                <div style="font-size:9px;color:var(--dim);">interface: Gi0/0/1</div>
+                <div style="font-size:9px;color:var(--dim);">ip: 192.168.1.10</div>
+                <div style="margin-top:8px;background:var(--biru);color:#0a1929;text-align:center;padding:5px;border-radius:6px;font-size:10px;font-weight:700;">GENERATE</div>
+              </div>
+              <div style="flex:1;background:#1e3a5f;border-radius:8px;padding:8px;border:1px solid var(--hijau);">
+                <div style="font-size:9px;color:var(--hijau);margin-bottom:4px;">OUTPUT</div>
+                <div style="font-size:9px;color:var(--dim);font-family:monospace;">interface Gi0/0/1<br> ip address 192.168.1.10<br> netmask 255.255.255.0<br> no shutdown<br>!</div>
+              </div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Config Generator</b><span>Generate konfigurasi dari template Jinja2 dengan variable substitution.</span></div>
+      </div>
+
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;padding:30px 12px 12px;">
+            <div style="font-size:11px;color:var(--biru);font-weight:700;margin-bottom:8px;">NETWORK DISCOVERY</div>
+            <div style="background:#1e3a5f;border-radius:8px;padding:10px;border:1px solid var(--line);margin-bottom:8px;">
+              <div style="font-size:9px;color:var(--dim);margin-bottom:4px;">NETWORK CIDR</div>
+              <div style="display:flex;gap:6px;">
+                <div style="flex:1;background:#0a1929;padding:5px 8px;border-radius:5px;font-size:10px;font-weight:600;">192.168.1.0/24</div>
+                <div style="background:var(--biru);color:#0a1929;padding:5px 10px;border-radius:5px;font-size:10px;font-weight:700;">SCAN</div>
+              </div>
+            </div>
+            <div style="background:#1e3a5f;border-radius:8px;padding:10px;border:1px solid var(--line);">
+              <div style="font-size:9px;color:var(--dim);margin-bottom:6px;">DISCOVERED DEVICES</div>
+              <div style="font-size:10px;color:var(--hijau);">&#9679; 192.168.1.1 &mdash; Router-Main (Cisco IOS)</div>
+              <div style="font-size:10px;color:var(--hijau);">&#9679; 192.168.1.2 &mdash; Switch-Core (Cisco XE)</div>
+              <div style="font-size:10px;color:var(--hijau);">&#9679; 192.168.1.10 &mdash; AP-Wireless (Cisco IOS)</div>
+              <div style="margin-top:8px;background:var(--hijau);color:#0a1929;text-align:center;padding:5px;border-radius:6px;font-size:10px;font-weight:700;">IMPORT SELECTED</div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Network Discovery</b><span>Auto-scan jaringan, deteksi device type, dan batch import dalam satu langkah.</span></div>
+      </div>
+
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;padding:30px 12px 12px;">
+            <div style="font-size:11px;color:var(--biru);font-weight:700;margin-bottom:8px;">TASK RUNNER</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;background:#1e3a5f;padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+                <div><div style="font-size:10px;font-weight:600;">task_001 &middot; Backup</div><div style="font-size:9px;color:var(--dim);">Router-Main</div></div>
+                <div style="text-align:right;"><div style="font-size:10px;color:var(--hijau);font-weight:700;">Running</div><div style="font-size:9px;color:var(--oranye);">75%</div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;background:#1e3a5f;padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+                <div><div style="font-size:10px;font-weight:600;">task_002 &middot; Config Push</div><div style="font-size:9px;color:var(--dim);">Switch-Core</div></div>
+                <div style="text-align:right;"><div style="font-size:10px;color:var(--oranye);font-weight:700;">Pending</div><div style="font-size:9px;color:var(--dim);">0%</div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;background:#1e3a5f;padding:8px 10px;border-radius:8px;border:1px solid var(--line);">
+                <div><div style="font-size:10px;font-weight:600;">task_003 &middot; Backup</div><div style="font-size:9px;color:var(--dim);">Firewall-Edge</div></div>
+                <div style="text-align:right;"><div style="font-size:10px;color:var(--hijau);font-weight:700;">Completed</div><div style="font-size:9px;color:var(--hijau);">100%</div></div>
+              </div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Task Runner</b><span>Monitor dan kelola semua automation task secara real-time.</span></div>
+      </div>
+
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;align-items:center;justify-content:center;padding:20px;">
+            <div style="width:100%;height:200px;background:#1e3a3f;border-radius:12px;border:1px solid var(--line);position:relative;overflow:hidden;">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--biru);border:2px solid #fff;"></div>
+              <div style="position:absolute;top:30%;left:25%;width:18px;height:18px;border-radius:50%;background:var(--hijau);border:2px solid #fff;"></div>
+              <div style="position:absolute;top:30%;right:25%;width:18px;height:18px;border-radius:50%;background:var(--hijau);border:2px solid #fff;"></div>
+              <div style="position:absolute;top:65%;left:30%;width:14px;height:14px;border-radius:50%;background:var(--oranye);border:2px solid #fff;"></div>
+              <div style="position:absolute;top:65%;right:30%;width:14px;height:14px;border-radius:50%;background:var(--oranye);border:2px solid #fff;"></div>
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:9px;color:var(--txt);font-weight:700;margin-top:20px;">Router</div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Network Topology</b><span>Visualisasi interaktif topologi jaringan dan hubungan antar perangkat.</span></div>
+      </div>
+
+      <div class="item">
+        <div class="phone">
+          <div class="layar" style="background:#0f2a3f;padding:30px 12px 12px;">
+            <div style="font-size:11px;color:var(--biru);font-weight:700;margin-bottom:8px;">AUTOMATION</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div style="background:#1e3a5f;border-radius:8px;padding:10px;border:1px solid var(--line);text-align:center;">
+                <div style="font-size:18px;margin-bottom:4px;">&#128190;</div>
+                <div style="font-size:10px;font-weight:600;">Config Backup</div>
+              </div>
+              <div style="background:#1e3a5f;border-radius:8px;padding:10px;border:1px solid var(--line);text-align:center;">
+                <div style="font-size:18px;margin-bottom:4px;">&#128200;</div>
+                <div style="font-size:10px;font-weight:600;">Monitoring</div>
+              </div>
+              <div style="background:#1e3a5f;border-radius:8px;padding:10px;border:1px solid var(--line);text-align:center;">
+                <div style="font-size:18px;margin-bottom:4px;">&#128270;</div>
+                <div style="font-size:10px;font-weight:600;">Compliance</div>
+              </div>
+              <div style="background:#1e3a5f;border-radius:8px;padding:10px;border:1px solid var(--line);text-align:center;">
+                <div style="font-size:18px;margin-bottom:4px;">&#128273;</div>
+                <div style="font-size:10px;font-weight:600;">Interface Config</div>
+              </div>
+            </div>
+          </div>
+          <span class="gestur"></span>
+        </div>
+        <div class="ket"><b>Automation</b><span>Jenis task automation yang tersedia: backup, monitoring, compliance, dan konfigurasi interface.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARSITEKTUR -->
+<section id="arsitektur">
+  <div class="wrap">
+    <div class="judul">
+      <span class="no">02 &mdash; Arsitektur Sistem</span>
+      <h2>Backend FastAPI + Frontend React, terhubung real-time</h2>
+      <p>Arsitektur modern dengan pemisahan concern yang jelas antara API, UI, dan koneksi device.</p>
+    </div>
+
+    <div class="kisi">
+      <div class="kartu">
+        <h3>Backend (FastAPI)</h3>
+        <div class="ikon" style="background:var(--biru2);border-color:rgba(0,188,212,.28);color:var(--biru);">&#9881;</div>
+        <p style="margin-top:8px;">
+          REST API dan WebSocket endpoints. Menangani device management, config generation,
+          task execution, dan network discovery. Dibangun dengan Python 3.8+.
+        </p>
+        <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:10px;background:var(--biru2);color:var(--biru);padding:3px 8px;border-radius:999px;border:1px solid rgba(0,188,212,.28);">FastAPI</span>
+          <span style="font-size:10px;background:var(--biru2);color:var(--biru);padding:3px 8px;border-radius:999px;border:1px solid rgba(0,188,212,.28);">WebSocket</span>
+          <span style="font-size:10px;background:var(--biru2);color:var(--biru);padding:3px 8px;border-radius:999px;border:1px solid rgba(0,188,212,.28);">Netmiko</span>
+          <span style="font-size:10px;background:var(--biru2);color:var(--biru);padding:3px 8px;border-radius:999px;border:1px solid rgba(0,188,212,.28);">AsyncIO</span>
+        </div>
+      </div>
+
+      <div class="kartu">
+        <h3>Frontend (React + TypeScript)</h3>
+        <div class="ikon" style="background:var(--hijau2);border-color:rgba(76,175,80,.28);color:var(--hijau);">&#127912;</div>
+        <p style="margin-top:8px;">
+          UI modern dengan Material Design. React Router untuk navigasi, TanStack Query
+          untuk data fetching, dan React Hot Toast untuk notifikasi.
+        </p>
+        <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:10px;background:var(--hijau2);color:var(--hijau);padding:3px 8px;border-radius:999px;border:1px solid rgba(76,175,80,.28);">React</span>
+          <span style="font-size:10px;background:var(--hijau2);color:var(--hijau);padding:3px 8px;border-radius:999px;border:1px solid rgba(76,175,80,.28);">TypeScript</span>
+          <span style="font-size:10px;background:var(--hijau2);color:var(--hijau);padding:3px 8px;border-radius:999px;border:1px solid rgba(76,175,80,.28);">MUI</span>
+          <span style="font-size:10px;background:var(--hijau2);color:var(--hijau);padding:3px 8px;border-radius:999px;border:1px solid rgba(76,175,80,.28);">Vite</span>
+        </div>
+      </div>
+
+      <div class="kartu">
+        <h3>Connection Manager</h3>
+        <div class="ikon" style="background:var(--oranye2);border-color:rgba(255,152,0,.28);color:var(--oranye);">&#128268;</div>
+        <p style="margin-top:8px;">
+          Manajemen koneksi device dengan connection pooling. Mendukung SSH, Telnet,
+          NETCONF, RESTCONF, dan gNMI. Optimized timeouts dan reusable connections.
+        </p>
+        <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:10px;background:var(--oranye2);color:var(--oranye);padding:3px 8px;border-radius:999px;border:1px solid rgba(255,152,0,.28);">SSH</span>
+          <span style="font-size:10px;background:var(--oranye2);color:var(--oranye);padding:3px 8px;border-radius:999px;border:1px solid rgba(255,152,0,.28);">Telnet</span>
+          <span style="font-size:10px;background:var(--oranye2);color:var(--oranye);padding:3px 8px;border-radius:999px;border:1px solid rgba(255,152,0,.28);">NETCONF</span>
+          <span style="font-size:10px;background:var(--oranye2);color:var(--oranye);padding:3px 8px;border-radius:999px;border:1px solid rgba(255,152,0,.28);">RESTCONF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR -->
+<section id="fitur">
+  <div class="wrap">
+    <div class="judul">
+      <span class="no">03 &mdash; Fitur Utama</span>
+      <h2>Semua yang dibutuhkan untuk otomatisasi jaringan</h2>
+    </div>
+
+    <div class="kisi">
+      <div class="kartu">
+        <div class="ikon">&#128230;</div>
+        <b>Device Management</b>
+        <p>Kelola perangkat jaringan dengan add, edit, delete. Monitor status online/offline dan test koneksi dengan latency measurement.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">&#128269;</div>
+        <b>Network Discovery</b>
+        <p>Auto-scan network dengan CIDR notation. Ping sweep, port scanning, dan auto-detection device type berdasarkan open ports.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">&#9998;&#65039;</div>
+        <b>Config Generator</b>
+        <p>Generate konfigurasi dinamis dari template Jinja2 dengan variable substitution. Push config dengan merge/replace/delete.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">&#9889;</div>
+        <b>Task Execution</b>
+        <p>Eksekusi command bulk, configuration deployment, dan scheduled tasks. Parallel execution untuk multiple devices.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">&#128506;</div>
+        <b>Network Topology</b>
+        <p>Visualisasi interaktif topologi jaringan dengan auto-discovery connections dan device relationship mapping.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">&#128295;</div>
+        <b>Automation</b>
+        <p>Automation task untuk backup, monitoring, compliance check, dan interface configuration. Scheduled jobs support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALUR -->
+<section id="alur">
+  <div class="wrap">
+    <div class="judul">
+      <span class="no">04 &mdash; Alur Data</span>
+      <h2>Dari input pengguna sampai eksekusi di device</h2>
+      <p>Setiap aksi di frontend melalui API call ke backend, yang kemudian menjalankan perintah di device via Netmiko.</p>
+    </div>
+
+    <div class="alur">
+      <div class="langkah">
+        <span class="n">Langkah 1</span>
+        <b>Input di Frontend</b>
+        <p>User memasukkan credentials atau memilih device dan commands di UI.</p>
+      </div>
+      <div class="panah">&rarr;</div>
+      <div class="langkah">
+        <span class="n">Langkah 2</span>
+        <b>API Request</b>
+        <p>Frontend mengirim POST/GET request ke FastAPI backend.</p>
+      </div>
+      <div class="panah">&rarr;</div>
+      <div class="langkah">
+        <span class="n">Langkah 3</span>
+        <b>Backend Processing</b>
+        <p>FastAPI memproses request, menyimpan data, dan menjalankan background task.</p>
+      </div>
+      <div class="panah">&rarr;</div>
+      <div class="langkah">
+        <span class="n">Langkah 4</span>
+        <b>Device Execution</b>
+        <p>Connection Manager menjalankan perintah via Netmiko/Napalm ke device.</p>
+      </div>
+      <div class="panah">&rarr;</div>
+      <div class="langkah">
+        <span class="n">Langkah 5</span>
+        <b>Response & Update</b>
+        <p>Hasil dikembalikan ke frontend via HTTP response atau WebSocket real-time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API -->
+<section id="api">
+  <div class="wrap">
+    <div class="judul">
+      <span class="no">05 &mdash; Dokumentasi API</span>
+      <h2>RESTful API endpoints untuk semua operasi</h2>
+      <p>Backend FastAPI menyediakan endpoints terstruktur untuk device management, task execution, dan network discovery.</p>
+    </div>
+
+    <div class="kisi">
+      <div class="kartu">
+        <h3>Device Endpoints</h3>
+        <table class="tabel" style="background:transparent;">
+          <tr><td>GET</td><td><code>/api/devices</code></td></tr>
+          <tr><td>POST</td><td><code>/api/devices</code></td></tr>
+          <tr><td>GET</td><td><code>/api/devices/{id}</code></td></tr>
+          <tr><td>PUT</td><td><code>/api/devices/{id}</code></td></tr>
+          <tr><td>DELETE</td><td><code>/api/devices/{id}</code></td></tr>
+          <tr><td>POST</td><td><code>/api/devices/{id}/test-connection</code></td></tr>
+          <tr><td>POST</td><td><code>/api/devices/{id}/execute</code></td></tr>
+        </table>
+      </div>
+
+      <div class="kartu">
+        <h3>Discovery Endpoints</h3>
+        <table class="tabel" style="background:transparent;">
+          <tr><td>GET</td><td><code>/api/devices/discovery/networks</code></td></tr>
+          <tr><td>POST</td><td><code>/api/devices/discovery/scan</code></td></tr>
+          <tr><td>GET</td><td><code>/api/devices/discovery/results</code></td></tr>
+          <tr><td>POST</td><td><code>/api/devices/discovery/import</code></td></tr>
+          <tr><td>POST</td><td><code>/api/devices/discovery/import-batch</code></td></tr>
+        </table>
+      </div>
+
+      <div class="kartu">
+        <h3>Task Endpoints</h3>
+        <table class="tabel" style="background:transparent;">
+          <tr><td>POST</td><td><code>/api/tasks</code></td></tr>
+          <tr><td>GET</td><td><code>/api/tasks/{id}</code></td></tr>
+          <tr><td>GET</td><td><code>/api/tasks</code></td></tr>
+          <tr><td>GET</td><td><code>/api/tasks/device/{id}</code></td></tr>
+          <tr><td>POST</td><td><code>/api/tasks/{id}/execute</code></td></tr>
+        </table>
+      </div>
+
+      <div class="kartu">
+        <h3>Config & Automation</h3>
+        <table class="tabel" style="background:transparent;">
+          <tr><td>GET</td><td><code>/api/config/templates</code></td></tr>
+          <tr><td>POST</td><td><code>/api/config/generate</code></td></tr>
+          <tr><td>POST</td><td><code>/api/config/deploy</code></td></tr>
+          <tr><td>GET</td><td><code>/api/automation/menu</code></td></tr>
+          <tr><td>POST</td><td><code>/api/automation/tasks/create</code></td></tr>
+          <tr><td>WS</td><td><code>/ws/{device_id}</code></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEKNIS -->
+<section id="teknis">
+  <div class="wrap">
+    <div class="judul">
+      <span class="no">06 &mdash; Spesifikasi Teknis</span>
+      <h2>Ringkasan teknologi dan kemampuan sistem</h2>
+    </div>
+
+    <table class="tabel">
+      <tr><td>Backend Framework</td><td>FastAPI (Python 3.8+)</td></tr>
+      <tr><td>Frontend Framework</td><td>React 18 + TypeScript</td></tr>
+      <tr><td>UI Library</td><td>Material UI (MUI)</td></tr>
+      <tr><td>Real-time Communication</td><td>WebSocket</td></tr>
+      <tr><td>Device Connectivity</td><td>Netmiko, Napalm, RESTCONF</td></tr>
+      <tr><td>Templating</td><td>Jinja2</td></tr>
+      <tr><td>Task Execution</td><td>AsyncIO + ThreadPoolExecutor</td></tr>
+      <tr><td>Connection Pooling</td><td>ConnectionManager with pooling</td></tr>
+      <tr><td>Supported Vendors</td><td>Cisco, Juniper, Arista, Huawei, Linux</td></tr>
+      <tr><td>Protocols</td><td>SSH, Telnet, NETCONF, RESTCONF, gNMI</td></tr>
+      <tr><td>Containerization</td><td>Docker + Docker Compose</td></tr>
+      <tr><td>State Management</td><td>TanStack Query (React Query)</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="wrap">
+    <h2>Siap mengotomatisasi jaringan Anda?</h2>
+    <p>Platform ini siap digunakan untuk lingkungan enterprise dengan arsitektur yang modular dan extensible.</p>
+    <div class="aksi">
+      <a class="btn btn-utama" href="#layar">Jelajahi Semua Fitur</a>
+      <a class="btn btn-hantu" href="#api">Lihat Dokumentasi API</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Network Automation Platform &mdash; Enterprise Network Automation with Real Device Connectivity</div>
+    <div>Version <b>2.0.0</b> &middot; Created by <b>Adi Susilo</b> &middot; 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
